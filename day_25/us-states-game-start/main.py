@@ -14,7 +14,6 @@ all_states = df.state.to_list()
 
 tim = turtle.Turtle()
 guessed_states = []
-states_remaining = []
 
 
 # Check if the guess is among the 50 states
@@ -32,9 +31,15 @@ while len(guessed_states) < 50:
         ).title()
 
     if answer_state.lower() == "exit":
-        for state in all_states:
-            if state not in guessed_states:
-                states_remaining.append(state)
+        # states_remaining = []
+        # for state in all_states:
+        #     if state not in guessed_states:
+        #         states_remaining.append(state)
+
+        states_remaining = [
+            state for state in all_states if state not in guessed_states
+        ]
+
         new_data = pd.DataFrame(states_remaining)
         new_data.to_csv("states_to_learn.csv")
         break
